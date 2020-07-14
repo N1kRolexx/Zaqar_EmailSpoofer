@@ -87,6 +87,15 @@ try {
         //dont send message
     } else {
         $mail->send();
+        
+        //Something to write to txt log
+        $log  = "Date: ".date("F j, Y, g:i a").' '.PHP_EOL.
+                "From email: ".$fromEmail." From Name: ".$fromName.' '.PHP_EOL.
+                "To email: ".$toEmail." Subject: ".$subjectLine." Message:".$message.' '.PHP_EOL.
+                "-----------------------------------------------------------------".PHP_EOL;
+        //Save string to log, use FILE_APPEND to append.
+        file_put_contents('./log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
+        
         //SUCESS mailed message
         echo "
         <div class=\"col-md-6 offset-md-3\">
